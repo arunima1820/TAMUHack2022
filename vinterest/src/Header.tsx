@@ -47,7 +47,7 @@ export default function Header(props:{page:number}){
                   fontSize: 'medium',
                   color: '#C5C5C5',
                 }}>
-                  About
+                  Get Started
                 </div>
                 <div style={{
                   flex: 1,
@@ -55,7 +55,7 @@ export default function Header(props:{page:number}){
                   fontSize: 'medium',
                   color: '#C5C5C5',
                 }}>
-                  Get Started
+                  Suggestions
                 </div>
               </div>
             </div>
