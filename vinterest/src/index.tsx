@@ -4,10 +4,26 @@ import './index.css';
 import HomePage from './HomePage';
 import Suggestions from './Suggestions';
 import Chatbot from './Chatbot';
-ReactDOM.render(
-  <React.StrictMode>
-    <Chatbot/>
-    {/* <Suggestions data={null}/> */}
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+import {
+  BrowserRouter as Router, Switch, Route,
+} from "react-router-dom";
+
+function App(){
+  return (
+    <Router>
+        <Switch>
+          <Route path="/chat">
+            <Chatbot />
+          </Route>
+          <Route path="/suggestions">
+            <Suggestions data={null}/>
+          </Route>
+          <Route path="/">
+            <HomePage />
+          </Route>
+        </Switch>
+    </Router>
+  );
+}
+ReactDOM.render(<App />, document.getElementById("root"));
+

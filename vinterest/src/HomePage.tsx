@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useCallback } from "react";
 import "./HomePage.css";
 import Header from "./Header";
 import HomePageCarousel from "./HomePageCarousel";
+import {useHistory} from 'react-router-dom';
+
 function HomePage() {
+  const history = useHistory();
+  const handleOnClick = useCallback(() => history.push('/chat'), [history]);
   return (
     <div
       style={{
@@ -11,7 +15,7 @@ function HomePage() {
         height: "100%",
       }}
     >
-      <Header page={0} />
+      <Header page={1} />
       <div
         style={{
           display: "flex",
@@ -59,6 +63,7 @@ function HomePage() {
               width: "250px",
               borderWidth: "0px",
             }}
+            onClick={handleOnClick}
           >
             Get Started
           </button>

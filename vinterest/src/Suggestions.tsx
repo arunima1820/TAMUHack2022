@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ useState, useEffect} from "react";
 import { Line } from "@nivo/line";
 import envicon from "./envicon.png";
 import socialicon from "./socialicon.png";
@@ -7,77 +7,137 @@ import { ScrollMenu } from 'react-horizontal-scrolling-menu';
 import Header from "./Header";
 import backarrow from "./backarrow.png";
 export default function Suggestions(props: { data: any }) {
-  let test = [
-    {
-      ticker: "AAPL",
-      name: "Apple",
-      price: "178.28",
-      environmentalImpact: "A",
-      socialImpact: "A",
-      animalConservation: "B",
-      data: {
-        id: "test",
-        color:"#F5F5F5",
-        data: [
-          { x: 1, y: 2 },
-          { x: 2, y: 2 },
-          { x: 3, y: 4 },
-          { x: 4, y: 6 },
-          { x: 5, y: 7 },
-          { x: 6, y: 3 },
-          { x: 7, y: 4 },
-          { x: 8, y: 4 },
-          { x: 9, y: 3 },
-          { x: 10, y: 5 },
-          { x: 11, y: 6 },
-          { x: 12, y: 8 },
-        ],
-      },
+
+  const [data, setData] = useState<any[]>([]);
+  let test=[{
+    ticker: "AAPL",
+    name: "Apple",
+    price: "178.28",
+    environmentalImpact: "A",
+    socialImpact: "A",
+    animalConservation: "B",
+    data: {
+      id: "AAPL",
+      data: [
+        { x: 1, y: 2 },
+        { x: 2, y: 2 },
+        { x: 3, y: 4 },
+        { x: 4, y: 6 },
+        { x: 5, y: 7 },
+        { x: 6, y: 3 },
+        { x: 7, y: 4 },
+        { x: 8, y: 4 },
+        { x: 9, y: 3 },
+        { x: 10, y: 5 },
+        { x: 11, y: 6 },
+        { x: 12, y: 8 },
+      ],
     },
-  ];
+  },
+  {
+    ticker: "MSFT",
+    name: "Microsoft",
+    price: "308.26",
+    environmentalImpact: "A",
+    socialImpact: "B",
+    animalConservation: "A",
+    data: {
+      id: "MSFT",
+      data: [
+        { x: 1, y: 2 },
+        { x: 2, y: 3 },
+        { x: 3, y: 4 },
+        { x: 4, y: 7 },
+        { x: 5, y: 8 },
+        { x: 6, y: 9 },
+        { x: 7, y: 10 },
+        { x: 8, y: 5 },
+        { x: 9, y: 3 },
+        { x: 10, y: 2 },
+        { x: 11, y: 1 },
+        { x: 12, y: 5 },
+      ],
+    },
+  },
+  {
+    ticker: "CRNC",
+    name: "Cerence Inc",
+    price: "59.73",
+    environmentalImpact: "A",
+    socialImpact: "B",
+    animalConservation: "C",
+    data: {
+      id: "CRNC",
+      data: [
+        { x: 1, y: 5 },
+        { x: 2, y: 6 },
+        { x: 3, y: 7 },
+        { x: 4, y: 3 },
+        { x: 5, y: 2 },
+        { x: 6, y: 2 },
+        { x: 7, y: 1 },
+        { x: 8, y: 2 },
+        { x: 9, y: 3 },
+        { x: 10, y: 6 },
+        { x: 11, y: 7 },
+        { x: 12, y: 9 },
+      ],
+    },
+  },
+];
+  useEffect(() => {
+    //axios.post(....)
+    setData(test);
+  },[]);
   
 
 
   return (
     <>
-    <Header page={3}/>
-      <div style={{
-        flex:1,
-        fontWeight:"bold",
-        fontSize:"24px",
-        textAlign:"center",
-        color:"black",
-        marginTop:"30px",
-      }}>
+      <Header page={3} />
+      <div
+        style={{
+          flex: 1,
+          fontWeight: "bold",
+          fontSize: "24px",
+          textAlign: "center",
+          color: "black",
+          marginTop: "30px",
+        }}
+      >
         Our Suggestions For You
       </div>
-      <button style={{
-        color:"black",
-        backgroundColor:"#F5F5F5",
-        borderRadius:"30px",
-        borderWidth:"0px",
-        fontSize:"16px",
-        fontWeight:"bold",
-        padding:"20px",
-        alignItems:"left",
-        justifyContent:"left",
-        alignContent:"center",
-        flexDirection:"row",
-        display:"flex",
-        flex:1,
-        marginLeft:"50px",
-      marginRight:"50px",
-      }}>
-        <img src={backarrow} alt="backarrow" style={{height:18, marginRight:"10px"}}/>
+      <button
+        style={{
+          color: "black",
+          backgroundColor: "#F5F5F5",
+          borderRadius: "30px",
+          borderWidth: "0px",
+          fontSize: "16px",
+          fontWeight: "bold",
+          padding: "20px",
+          alignItems: "left",
+          justifyContent: "left",
+          alignContent: "center",
+          flexDirection: "row",
+          display: "flex",
+          flex: 1,
+          marginLeft: "50px",
+          marginRight: "50px",
+        }}
+      >
+        <img
+          src={backarrow}
+          alt="backarrow"
+          style={{ height: 18, marginRight: "10px" }}
+        />
         <div>Edit Preferences</div>
       </button>
-    <ScrollMenu>
-      <Card data={test[0]}></Card>
-      <Card data={test[0]}></Card>
-      <Card data={test[0]}></Card>
-      <Card data={test[0]}></Card>
-      <Card data={test[0]}></Card>
-    </ScrollMenu>
+      <ScrollMenu>
+        {data.map((item: any) => {
+          return <Card data={item}></Card>;
+        })}
+      </ScrollMenu>
     </>
   );
 }

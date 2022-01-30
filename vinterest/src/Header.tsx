@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import logo from './logo.png';
 
 export default function Header(props:{page:number}){
@@ -20,7 +21,8 @@ export default function Header(props:{page:number}){
             </div>
             <div style={{
               flex: 1,
-            }}>
+            }}
+            >
               <div style={{
                 backgroundColor: '#F5F5F5',
                 flex: 1,
@@ -33,30 +35,34 @@ export default function Header(props:{page:number}){
                 alignItems: 'center',
                 justifyContent: 'center',
               }}>
-                <div style={{
+                  <Link to={"/"} style={{
                   flex: 1,
                   fontWeight: 'bold',
                   fontSize: 'medium',
                   color: props.page===1?'black':"#C5C5C5",
+                    textDecoration: 'none',
                 }}>
                   Home
-                </div>
-                <div style={{
+                </Link>
+                <Link to={"/chat"}
+                style={{
                   flex: 1,
                   fontWeight: 'bold',
                   fontSize: 'medium',
                   color: props.page===2?'black':"#C5C5C5",
+                    textDecoration: 'none',
                 }}>
                   Get Started
-                </div>
-                <div style={{
+                </Link>
+                <Link to={"/suggestions"} style={{
                   flex: 1,
                   fontWeight: 'bold',
                   fontSize: 'medium',
                   color: props.page===3?'black':"#C5C5C5",
+                    textDecoration: 'none',
                 }}>
                   Suggestions
-                </div>
+                </Link>
               </div>
             </div>
             <div style={{
