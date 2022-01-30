@@ -13,7 +13,7 @@ import { useHistory } from "react-router-dom";
 import { useCallback } from "react";
 export default function Chatbot() {
     const history = useHistory();
-  const handleOnClick = useCallback(() => history.push('/suggestions'), [history]);
+  const handleOnClick = useCallback(() => history.push({pathname:'suggestions',state:{}}), [history]);
   return (
     <div
       style={{

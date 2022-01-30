@@ -1,4 +1,5 @@
-import React,{ useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from 'react-router-dom';
 import { Line } from "@nivo/line";
 import envicon from "./envicon.png";
 import socialicon from "./socialicon.png";
@@ -7,7 +8,8 @@ import { ScrollMenu } from 'react-horizontal-scrolling-menu';
 import Header from "./Header";
 import backarrow from "./backarrow.png";
 export default function Suggestions(props: { data: any }) {
-
+  const { state } = useLocation();
+  console.log(state)
   const [data, setData] = useState<any[]>([]);
   let test=[{
     ticker: "AAPL",
