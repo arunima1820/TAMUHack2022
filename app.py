@@ -1,5 +1,5 @@
 import os
-
+from plot import *
 from flask import Flask, render_template
 from flask import request
 
@@ -32,6 +32,7 @@ def start():
 
 @app.route("/about")
 def about():
+    generatePlot()
     return render_template("about.html")
 
 
