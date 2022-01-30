@@ -10,10 +10,33 @@ import {
 import Header from "./Header";
 import robot from "./robot.png";
 import { useHistory } from "react-router-dom";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
+
+function keyOf<T>(key: keyof T) {
+  return key;
+}
+
 export default function Chatbot() {
-    const history = useHistory();
-  const handleOnClick = useCallback(() => history.push({pathname:'suggestions',state:{}}), [history]);
+  const history = useHistory();
+  const [impact, setImpact] = useState("-1");
+  const [issues, setIssues] = useState<string[]>([]);
+  const [checked, setChecked] = useState<any>({ "Environment": false, "Privacy": false, "Women": false, "Animal Abuse": false, "Representation": false, "LGBTQ": false });
+  const handleChange = (key: string) => {
+    let currentchecked = JSON.parse(JSON.stringify(checked));
+    currentchecked[key] = !currentchecked[key];
+    setChecked(currentchecked);
+  }
+  useEffect(() => { getIssues() }, [checked]);
+  const getIssues = () => {
+    let ret: Array<string> = [];
+    for (const key in checked) {
+      if (checked[key] === true) {
+        ret.push(key);
+      }
+    }
+    setIssues(ret);
+  }
+  const handleOnClick = useCallback(() => history.push({ pathname: 'suggestions', state: { "envrating": impact, "socialrating": "1", "issuescareabout": issues } }), [history]);
   return (
     <div
       style={{
@@ -154,6 +177,8 @@ export default function Chatbot() {
                   row
                   aria-labelledby="demo-row-radio-buttons-group-label"
                   name="row-radio-buttons-group"
+                  value={impact}
+                  onChange={e => setImpact(e.target.value)}
                 >
                   <FormControlLabel
                     value="1"
@@ -240,42 +265,42 @@ export default function Chatbot() {
               }}
             >
               <FormGroup>
-                <FormControlLabel control={<Checkbox />} label="Environment" />
-                <FormControlLabel control={<Checkbox />} label="Privacy" />
+                <FormControlLabel control={<Checkbox checked={checked["Environment"]} onChange={e => handleChange("Environment")} />} label="Environment" />
+                <FormControlLabel control={<Checkbox checked={checked["Privacy"]} onChange={e => handleChange("Privacy")} />} label="Privacy" />
                 <FormControlLabel
-                  control={<Checkbox />}
+                  control={<Checkbox checked={checked["Representation"]} onChange={e => handleChange("Representation")} />}
                   label="Equal Representation"
                 />
                 <FormControlLabel
-                  control={<Checkbox />}
+                  control={<Checkbox checked={checked["Women"]} onChange={e => handleChange("Women")} />}
                   label="Women's Rights"
                 />
                 <FormControlLabel
-                  control={<Checkbox />}
+                  control={<Checkbox checked={checked["Animal Abuse"]} onChange={e => handleChange("Animal Abuse")} />}
                   label="Animal Conservation"
                 />
-                <FormControlLabel control={<Checkbox />} label="LGBTQ" />
+                <FormControlLabel control={<Checkbox checked={checked["LGBTQ"]} onChange={e => handleChange("LGBTQ")} />} label="LGBTQ" />
               </FormGroup>
             </div>
           </div>
-          
+
         </div>
         <button
-            style={{
-              backgroundColor: "#B75CFF",
-              borderRadius: "50px",
-              color: "white",
-              fontSize: "24px",
-              fontWeight: "bold",
-              marginTop: "20px",
-              padding: "15px",
-              width: "250px",
-              borderWidth: "0px",
-            }}
-            onClick={handleOnClick}
-          >
-            Next
-          </button>
+          style={{
+            backgroundColor: "#B75CFF",
+            borderRadius: "50px",
+            color: "white",
+            fontSize: "24px",
+            fontWeight: "bold",
+            marginTop: "20px",
+            padding: "15px",
+            width: "250px",
+            borderWidth: "0px",
+          }}
+          onClick={handleOnClick}
+        >
+          Next
+        </button>
       </div>
     </div>
   );
