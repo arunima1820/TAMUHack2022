@@ -37,7 +37,7 @@ export default function Header(props:{page:number}){
                   flex: 1,
                   fontWeight: 'bold',
                   fontSize: 'medium',
-                  color: 'black',
+                  color: props.page===1?'black':"#C5C5C5",
                 }}>
                   Home
                 </div>
@@ -45,7 +45,7 @@ export default function Header(props:{page:number}){
                   flex: 1,
                   fontWeight: 'bold',
                   fontSize: 'medium',
-                  color: '#C5C5C5',
+                  color: props.page===2?'black':"#C5C5C5",
                 }}>
                   About
                 </div>
@@ -53,7 +53,7 @@ export default function Header(props:{page:number}){
                   flex: 1,
                   fontWeight: 'bold',
                   fontSize: 'medium',
-                  color: '#C5C5C5',
+                  color: props.page===3?'black':"#C5C5C5",
                 }}>
                   Get Started
                 </div>
